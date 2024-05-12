@@ -14,6 +14,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import com.bumptech.glide.Glide
 import kotlinx.coroutines.launch
 import org.itmo.pokemonapp.PokemonApplication
+import org.itmo.pokemonapp.R
 import org.itmo.pokemonapp.data.model.domain.Pokemon
 import org.itmo.pokemonapp.databinding.FragmentPokemonBinding
 import org.itmo.pokemonapp.presentation.viewmodel.pokemon.PokemonIntent
@@ -81,6 +82,17 @@ class PokemonFragment : Fragment() {
         binding?.run {
             pokemonName.text = pokemon.name
             pokemonSpecies.text = pokemon.speciesName
+            pokemonHeight.text = pokemon.height.toString()
+            pokemonWeight.text = pokemon.weight.toString()
+            pokemonTypes.text = pokemon.types.joinToString(separator = ", ")
+            pokemonAbilities.text = pokemon.abilities.joinToString(separator = ", ")
+            chipAttack.text = getString(R.string.stat_attack, pokemon.stats["attack"])
+            chipDefense.text = getString(R.string.stat_defense, pokemon.stats["defense"])
+            chipHp.text = getString(R.string.stat_hp, pokemon.stats["hp"])
+            chipSpecialDefense.text =
+                getString(R.string.stat_special_defense, pokemon.stats["special-defense"])
+            chipSpeed.text = getString(R.string.stat_speed, pokemon.stats["speed"])
+
             Glide.with(image).load(pokemon.imgUrl).into(image)
         }
     }
