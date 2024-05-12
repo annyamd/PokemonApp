@@ -72,9 +72,12 @@ class PokemonFragment : Fragment() {
                 }
             }
 
-            is PokemonViewState.PokemonLoadError -> Toast.makeText(
-                context, "Error! message: ${state.message}!", Toast.LENGTH_SHORT
-            ).show()
+            is PokemonViewState.PokemonLoadError -> {
+                binding?.progressBar?.isVisible = false
+                Toast.makeText(
+                    context, "Error! message: ${state.message}!", Toast.LENGTH_SHORT
+                ).show()
+            }
         }
     }
 

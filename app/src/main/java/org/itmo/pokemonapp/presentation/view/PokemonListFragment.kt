@@ -81,9 +81,12 @@ class PokemonListFragment(private val onPokemonSelected: (String) -> Unit) : Fra
                 }
             }
 
-            is PokemonListViewState.ListLoadError -> Toast.makeText(
-                context, "Error! message: ${state.message}!", Toast.LENGTH_SHORT
-            ).show()
+            is PokemonListViewState.ListLoadError -> {
+                binding?.progressBar?.isVisible = false
+                Toast.makeText(
+                    context, "Error! message: ${state.message}!", Toast.LENGTH_SHORT
+                ).show()
+            }
         }
     }
 
