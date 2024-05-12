@@ -8,10 +8,10 @@ import androidx.fragment.app.replace
 import org.itmo.pokemonapp.R
 
 class MainActivity : AppCompatActivity() {
-    private val pokemonListFragmentFactory = PokemonListFragment.PokemonListFragmentFactory(::onPokemonItemSelected)
+    private val fragmentFactory = FragmentFactory(::onPokemonItemSelected)
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        supportFragmentManager.fragmentFactory = pokemonListFragmentFactory
+        supportFragmentManager.fragmentFactory = fragmentFactory
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)

@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentFactory
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -92,17 +91,6 @@ class PokemonListFragment(private val onPokemonSelected: (String) -> Unit) : Fra
         super.onDestroyView()
         binding?.pokemonListRv?.adapter = null
         binding = null
-    }
-
-
-    class PokemonListFragmentFactory(private val onPokemonSelected: (String) -> Unit) :
-        FragmentFactory() {
-        override fun instantiate(classLoader: ClassLoader, className: String): Fragment {
-            if (className == PokemonListFragment::class.java.name) {
-                return PokemonListFragment(onPokemonSelected)
-            }
-            return super.instantiate(classLoader, className)
-        }
     }
 
 }
