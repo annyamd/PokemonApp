@@ -6,7 +6,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.bumptech.glide.Glide
-import org.itmo.pokemonapp.data.model.domain.Pokemon
 import org.itmo.pokemonapp.data.model.domain.PokemonShort
 import org.itmo.pokemonapp.databinding.ItemPokemonBinding
 
@@ -17,6 +16,7 @@ class PokemonListAdapter(private val onItemClicked: (String) -> Unit) :
         set(value) {
             field = value
             Log.i("retrofit", "Adapter ok")
+            //better replace with DiffUtil
             notifyDataSetChanged()
         }
 

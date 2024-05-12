@@ -12,8 +12,3 @@ data class Pokemon(
     val stats: Map<String, Int>,
     val imgUrl: String
 )
-
-data class Stat(
-    val name: String,
-    val value: Int
-)

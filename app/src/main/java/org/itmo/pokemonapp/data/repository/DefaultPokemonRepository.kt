@@ -4,7 +4,6 @@ import android.util.Log
 import org.itmo.pokemonapp.data.model.domain.Pokemon
 import org.itmo.pokemonapp.data.model.domain.PokemonShort
 import org.itmo.pokemonapp.data.model.domain.Result
-import org.itmo.pokemonapp.data.model.domain.Stat
 import org.itmo.pokemonapp.data.model.dto.PokemonDto
 import org.itmo.pokemonapp.data.model.dto.PokemonShortDto
 import org.itmo.pokemonapp.data.network.PokemonApi
