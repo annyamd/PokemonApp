@@ -1,12 +1,14 @@
 package org.itmo.pokemonapp.presentation.view
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentFactory
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -20,7 +22,7 @@ import org.itmo.pokemonapp.presentation.viewmodel.pokemonlist.PokemonListIntent
 import org.itmo.pokemonapp.presentation.viewmodel.pokemonlist.PokemonListViewModel
 import org.itmo.pokemonapp.presentation.viewmodel.pokemonlist.PokemonListViewState
 
-class PokemonListFragment : Fragment() {
+class PokemonListFragment(private val onPokemonSelected: (String) -> Unit) : Fragment() {
 
     private var binding: FragmentPokemonListBinding? = null
     private val viewModel: PokemonListViewModel by viewModels {
@@ -55,17 +57,21 @@ class PokemonListFragment : Fragment() {
             }
         }
 
-        viewModel.submitIntent(PokemonListIntent.Init)
+        if (savedInstanceState == null) {
+            viewModel.submitIntent(PokemonListIntent.Init)
+        }
+
     }
 
     private fun onPokemonClicked(name: String) {
-        Toast.makeText(context, "Clicked on: $name!", Toast.LENGTH_SHORT).show()
+        onPokemonSelected.invoke(name)
     }
 
     private fun updateUi(state: PokemonListViewState) {
         when (state) {
             PokemonListViewState.Loading -> {
                 binding?.run {
+                    Log.i("retrofit", "loading state")
                     progressBar.isVisible = true
                     pokemonListRv.isVisible = false
                 }
@@ -85,5 +91,14 @@ class PokemonListFragment : Fragment() {
         }
     }
 
+
+    class PokemonListFragmentFactory(private val onPokemonSelected: (String) -> Unit) : FragmentFactory() {
+        override fun instantiate(classLoader: ClassLoader, className: String): Fragment {
+            if (className == PokemonListFragment::class.java.name) {
+                return PokemonListFragment(onPokemonSelected)
+            }
+            return super.instantiate(classLoader, className)
+        }
+    }
 
 }
