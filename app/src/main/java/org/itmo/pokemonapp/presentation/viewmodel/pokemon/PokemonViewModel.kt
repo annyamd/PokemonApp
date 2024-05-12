@@ -36,12 +36,14 @@ class PokemonViewModel(
         }
     }
 
-    private fun mapStateToViewState() =
-        when {
-            state.isLoading -> PokemonViewState.Loading
-            state.error == null -> PokemonViewState.PokemonLoaded(state.pokemon!!)
-            else -> PokemonViewState.PokemonLoadError(state.error)
+    private fun mapStateToViewState(): PokemonViewState {
+        return if (state.isLoading) {
+            PokemonViewState.Loading
+        } else {
+            state.pokemon?.let { PokemonViewState.PokemonLoaded(it) }
+                ?: PokemonViewState.PokemonLoadError(state.error)
         }
+    }
 
     private fun loadPokemon() = viewModelScope.launch {
         when (val result = repository.getPokemonByName(pokemonName)) {
