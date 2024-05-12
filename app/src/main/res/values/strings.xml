@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">PokemonApp</string>
+    <string name="stat_defense">Defense: %1$d</string>
+    <string name="stat_attack">Attack: %1$d</string>
+    <string name="stat_hp">HP: %1$d</string>
+    <string name="stat_special_defense">Special Defense: %1$d</string>
+    <string name="stat_speed">Speed: %1$d</string>
+    <string name="species_label">Species:</string>
+    <string name="height_label">Height:</string>
+    <string name="weight_label">Weight:</string>
+    <string name="types_label">Types</string>
+    <string name="abilities_label">Abilities</string>
+    <string name="stats_label">Stats</string>
+
 </resources>
