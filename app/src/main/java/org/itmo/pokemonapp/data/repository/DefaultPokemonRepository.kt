@@ -42,7 +42,7 @@ class DefaultPokemonRepository(private val api: PokemonApi) : PokemonRepository 
         )
     }
 
-    private fun mapPokemonDtoToEntity(dto: PokemonDto) : Pokemon {
+    private fun mapPokemonDtoToEntity(dto: PokemonDto): Pokemon {
         val imgUrl = PokemonImageUrlProvider.getById(dto.id)
         return Pokemon(
             id = dto.id,
@@ -52,8 +52,8 @@ class DefaultPokemonRepository(private val api: PokemonApi) : PokemonRepository 
             speciesName = dto.species.name,
             types = dto.types.map { it.type.name },
             abilities = dto.abilities.map { it.ability.name },
-            stats = dto.stats.map {
-                Stat(it.stat.name, it.value)
+            stats = dto.stats.associate {
+                it.stat.name to it.value
             },
             imgUrl = imgUrl
         )
