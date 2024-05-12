@@ -97,6 +97,11 @@ class PokemonFragment : Fragment() {
         }
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding = null
+    }
+
     companion object {
         const val POKEMON_NAME: String = "pokemon name"
     }

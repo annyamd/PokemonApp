@@ -31,8 +31,6 @@ class PokemonListFragment(private val onPokemonSelected: (String) -> Unit) : Fra
         PokemonListViewModel.PokemonListViewModelFactory(application.pokemonRepository)
     }
 
-    private var pokemonListAdapter: PokemonListAdapter? = null
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
@@ -43,10 +41,9 @@ class PokemonListFragment(private val onPokemonSelected: (String) -> Unit) : Fra
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        pokemonListAdapter = pokemonListAdapter ?: PokemonListAdapter(::onPokemonClicked)
         binding?.run {
             pokemonListRv.layoutManager = LinearLayoutManager(context)
-            pokemonListRv.adapter = pokemonListAdapter
+            pokemonListRv.adapter = pokemonListRv.adapter ?: PokemonListAdapter(::onPokemonClicked)
         }
 
         viewLifecycleOwner.lifecycleScope.launch {
@@ -78,8 +75,8 @@ class PokemonListFragment(private val onPokemonSelected: (String) -> Unit) : Fra
             }
 
             is PokemonListViewState.ListLoaded -> {
-                pokemonListAdapter?.pokemonList = state.pokemonList
                 binding?.run {
+                    (pokemonListRv.adapter as PokemonListAdapter).pokemonList = state.pokemonList
                     progressBar.isVisible = false
                     pokemonListRv.isVisible = true
                 }
@@ -91,8 +88,15 @@ class PokemonListFragment(private val onPokemonSelected: (String) -> Unit) : Fra
         }
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding?.pokemonListRv?.adapter = null
+        binding = null
+    }
 
-    class PokemonListFragmentFactory(private val onPokemonSelected: (String) -> Unit) : FragmentFactory() {
+
+    class PokemonListFragmentFactory(private val onPokemonSelected: (String) -> Unit) :
+        FragmentFactory() {
         override fun instantiate(classLoader: ClassLoader, className: String): Fragment {
             if (className == PokemonListFragment::class.java.name) {
                 return PokemonListFragment(onPokemonSelected)
