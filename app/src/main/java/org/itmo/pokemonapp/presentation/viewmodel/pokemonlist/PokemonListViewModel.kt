@@ -1,4 +1,4 @@
-package org.itmo.pokemonapp.presentation.viewmodel
+package org.itmo.pokemonapp.presentation.viewmodel.pokemonlist
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

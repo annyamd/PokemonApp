@@ -16,9 +16,9 @@ import kotlinx.coroutines.launch
 import org.itmo.pokemonapp.PokemonApplication
 import org.itmo.pokemonapp.databinding.FragmentPokemonListBinding
 import org.itmo.pokemonapp.presentation.view.adapter.PokemonListAdapter
-import org.itmo.pokemonapp.presentation.viewmodel.PokemonListIntent
-import org.itmo.pokemonapp.presentation.viewmodel.PokemonListViewModel
-import org.itmo.pokemonapp.presentation.viewmodel.PokemonListViewState
+import org.itmo.pokemonapp.presentation.viewmodel.pokemonlist.PokemonListIntent
+import org.itmo.pokemonapp.presentation.viewmodel.pokemonlist.PokemonListViewModel
+import org.itmo.pokemonapp.presentation.viewmodel.pokemonlist.PokemonListViewState
 
 class PokemonListFragment : Fragment() {
 

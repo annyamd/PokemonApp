@@ -1,4 +1,4 @@
-package org.itmo.pokemonapp.presentation.viewmodel
+package org.itmo.pokemonapp.presentation.viewmodel.pokemonlist
 
 class PokemonListReducer {
     fun reduce(intent: PokemonListIntent, state: PokemonListState): PokemonListState {

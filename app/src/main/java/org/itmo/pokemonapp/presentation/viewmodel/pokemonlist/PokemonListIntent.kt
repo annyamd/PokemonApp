@@ -1,4 +1,4 @@
-package org.itmo.pokemonapp.presentation.viewmodel
+package org.itmo.pokemonapp.presentation.viewmodel.pokemonlist
 
 import org.itmo.pokemonapp.data.model.domain.PokemonShort
 
